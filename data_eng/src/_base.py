@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from pyspark.sql import DataFrame
+#from pyspark.sql import DataFrame
 import re 
 
 class DataEngineering(metaclass=ABCMeta):
@@ -18,7 +18,7 @@ class DataEngineering(metaclass=ABCMeta):
 
 
     @staticmethod
-    def rename_columns(input_df: DataFrame, rename_list:list, col_suffix:str, remove_numbers:bool):
+    def rename_columns(input_df: object, rename_list:list, col_suffix:str, remove_numbers:bool):
         """Rename column in the list and append suffix to end of column name
 
         Args:

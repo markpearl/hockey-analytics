@@ -1,23 +1,7 @@
-from pyspark.sql import SparkSession
+#from pyspark.sql import SparkSession
 from enum import Enum
 import os
 
-def get_configs(spark):
-    """Get configuration for dbutils and environment
-
-    Args:
-        spark (SparkSession): [Spark session variable]
-    """    
-    try:
-        from pyspark.dbutils import DBUtils
-        dbutils = DBUtils(spark)
-        env = os.environ['ENV']
-
-    except KeyError:
-        from pyspark.dbutils import DBUtils
-        dbutils = DBUtils(spark)
-        env = dbutils.widgets.get("ENV")
-    return dbutils, env    
 
 class Config(Enum):
     """[Base class for locational marginalized pricing project Contains structure to
@@ -31,11 +15,8 @@ class Config(Enum):
         gold_database (str): [Database containing model inference results for each price variable]
     """    
     #class variables
-    spark = SparkSession.builder.getOrCreate()
-    dbutils, ENV = get_configs(spark)
-    BRONZE_DATABASE = f"{ENV}_bronze_hockey_analytics"
-    SILVER_DATABASE = f"{ENV}_silver_hockey_analytics"
-    GOLD_DATABASE = f"{ENV}_gold_hockey_analytics"
-    TIME_COLUMN_NAME = "date_time_utc"
-    HISTORICAL_CUTOFF_DATE = "2018-01-01 00:00:00"
+    #spark = SparkSession.builder.getOrCreate()
+    #ENV = os.environ['env']
+    DATABASE = f"hockey_analytics"
+    HISTORICAL_CUTOFF_DATE = "2001-08-01"
     API_URL = "https://statsapi.web.nhl.com/api/v1"
